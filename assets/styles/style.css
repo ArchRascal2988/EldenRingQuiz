@@ -28,7 +28,7 @@ html{
     filter: blur(2px);
 }
 
-.currContent{
+.currContent, .hsContent{
     width: 60%;
     height:55%;
     display: flex;

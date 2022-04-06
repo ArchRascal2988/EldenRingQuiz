@@ -24,6 +24,9 @@ var QnA= [
     {question:"Who are Marika and Radagon?", answer:"Two aspects of the deity that oversaw The Lands Between.", o1: "Two gods that created the Elden Ring.",o2: "Aliens.",o3: "A buch of jerks.",o4: "Two aspects of the deity that oversaw The Lands Between."}, 
     {question:"What is the Elden Ring", answer:"Basically, the universe and its defnitions.", o1: "It's like Tolkien's One Ring.",o2: "Basically, the universe and its defnitions.",o3: "The friends we made along the way.",o4: "A device that kept the flow of death, time, and energy."}
 ]
+var blank= [];
+var prevScores= JSON.parse(localStorage.getItem("highscores"));
+var scores=blank.concat(prevScores);
 const startingTime= 60;
 var time= startingTime;
 
@@ -47,7 +50,7 @@ function firstIteration(){
     container.append(title);
     container.append(preamble);
     container.append(startBtn);
-    
+
     startBtn.addEventListener("click", function(){
         gameStart();
     })
@@ -107,6 +110,7 @@ function iterate(){
                     setTimeout(function(){
                         document.querySelector("p").remove();
                     }, 1000);
+                    time-= 5;
                     score-=500;
                 }
             });
@@ -149,7 +153,7 @@ function youLose(){
 }
 
 function youWin(){
-    score-= time *150;
+    score-= time *15;
     stoptimer(); 
     var title= document.createElement("h1");
     var hsButton= document.createElement("button");
@@ -181,8 +185,8 @@ function youWin(){
             score: score,
             initals: hsInput.value
         }
-        console.log(hs);
-        localStorage.setItem("highscore", JSON.stringify(hs));
+        scores.push(hs);
+        localStorage.setItem("highscores", JSON.stringify(scores));
         hsInput.value="";
     })
 }
